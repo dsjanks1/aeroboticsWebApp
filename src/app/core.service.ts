@@ -4,7 +4,8 @@ import { share, catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { environment } from '../environments/environment';
-import { Clients } from '../app/models/clients.model'
+import {Clients } from '../app/models/clients.model'
+import {ScoutMissions} from '../app/models/scoutMissions.module'
 
 import { debug } from 'util';
 // import { RequestOptions} from 'https';
@@ -17,11 +18,15 @@ const httpOptions ={
   providedIn: 'root'
 })
 
+
+
 export class CoreService {
 
   private observable: Observable<any>;
   private clients: Clients;
+  private scoutMissions: ScoutMissions;
   private clientsEndpoint: string;
+  private scoutMissionEndpoint: string;
   private apiHeader: any;
 
 
@@ -35,6 +40,7 @@ export class CoreService {
   constructor(private http: HttpClient) {
 
     this.clientsEndpoint = 'https://sherlock.aerobotics.io/developers/clients/';
+    this.scoutMissionEndpoint = 'https://sherlock.aerobotics.io/developers/scoutmissions/';
   }
 
 
@@ -42,15 +48,29 @@ export class CoreService {
 
   getClients() {
     const url = `${this.clientsEndpoint}`;
-    const header = `${this.apiHeader}`;
-
-
 
     this.observable = this.http.get(url, httpOptions).pipe(
       map(response => {
         this.observable = null;
         this.clients = new Clients(response);
         return this.clients
+      }),
+      catchError(error => this.handleError(error)),
+      share()
+);
+    return this.observable
+  }
+
+  //Get Scout Missions
+
+  getScoutMissions() {
+    const url = `${this.scoutMissionEndpoint}`;
+
+    this.observable = this.http.get(url, httpOptions).pipe(
+      map(response => {
+        this.observable = null;
+        this.scoutMissions = new ScoutMissions(response);
+        return this.scoutMissions
       }),
       catchError(error => this.handleError(error)),
       share()
