@@ -1,16 +1,43 @@
-<table class="responsive-table highlight striped centered">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email </th>
-      <th>User ID</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let client of clients">
-      <td>{{client.name}}</td>
-      <td>{{client.email}}</td>
-      <td>{{client.user_id}}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="card-panel">
+
+  <table class="responsive-table highlight striped centered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email </th>
+        <th>User ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let client of clients">
+        <td>{{client.name}}</td>
+        <td>{{client.email}}</td>
+        <td>{{client.user_id}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card-panel">
+
+  <table class="responsive-table highlight striped centered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email </th>
+        <th>User ID</th>
+        <th>User ID</th>
+        <th>User ID</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let scoutMission of scoutMissions">
+        <td>{{client.title}}</td>
+        <td>{{client.id}}</td>
+        <td>{{client.farm_id}}</td>
+        <td>{{client.date}}</td>
+        <td>{{client.complete}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

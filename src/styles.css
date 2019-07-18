@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-/* @import "../node_modules/materialize-css/sass/materialize.scss"; */
+@import "../node_modules/materialize-css/dist/css/materialize.css";
 
 nav {
-    background-color: aqua !important
+    background-color: #30435E !important
 }
 
 td {
@@ -15,23 +15,34 @@ th {
 
 .sidenav {
     width: 250px;
+    border-right: 1px solid #000;
+    top: 0;
+    margin:0;
+    /* padding-bottom: 60px; */
+    background-color: #fff;
+    z-index: 999;
+    overflow-y: auto;
+    will-change: transform;
+    backface-visibility: hidden;
+    
 }
 
 .sidenav .user-view {
     padding: 14px 42px 0;
     margin-bottom: 18px;
+    
 }
 
 .sidenav .divider {
     margin: 0px 0 0 0;
 }
-
+.sidenav a{
+    color: #fff;
+    padding: 22px 22px 22px 42px;
+}
 .sidenav li.active {
-    background-color: blue;
-
-    /* >a{
-        color: #fff;
-    } */
+    background-color: #30435E;
+    
 }
 
 .headeer,
@@ -49,4 +60,20 @@ th {
     margin: 0 auto;
     max-width: 1280;
     width: 90%;
+}
+
+.card-panel{
+    padding: 10pc;
+    width: 100%;
+}
+
+.logo-footer{
+    position: absolute;
+    
+}
+.app-content{
+    padding-top: 20px;
+}
+.center-text{
+    text-align: center;
 }
