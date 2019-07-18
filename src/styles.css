@@ -1,1 +1,52 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import "../node_modules/materialize-css/sass/materialize.scss"; */
+
+nav {
+    background-color: aqua !important
+}
+
+td {
+    font-size: 14px;
+}
+
+th {
+    font-size: 12px;
+}
+
+.sidenav {
+    width: 250px;
+}
+
+.sidenav .user-view {
+    padding: 14px 42px 0;
+    margin-bottom: 18px;
+}
+
+.sidenav .divider {
+    margin: 0px 0 0 0;
+}
+
+.sidenav li.active {
+    background-color: blue;
+
+    /* >a{
+        color: #fff;
+    } */
+}
+
+.headeer,
+.main,
+.footer {
+    padding-left: 300px
+}
+
+@media only screen and (min-width: 992px) {
+    .container {
+        width: 100%;
+    }
+}
+.container{
+    margin: 0 auto;
+    max-width: 1280;
+    width: 90%;
+}

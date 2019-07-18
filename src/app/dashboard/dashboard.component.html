@@ -1,21 +1,16 @@
-<table class="responsive-table highlight striped">
+<table class="responsive-table highlight striped centered">
   <thead>
     <tr>
-      <th>
-        Name
-      </th>
-      <th>
-        Email
-      </th>
-      <th>
-        User ID
-      </th>
+      <th>Name</th>
+      <th>Email </th>
+      <th>User ID</th>
     </tr>
   </thead>
-
   <tbody>
     <tr *ngFor="let client of clients">
       <td>{{client.name}}</td>
+      <td>{{client.email}}</td>
+      <td>{{client.user_id}}</td>
     </tr>
   </tbody>
 </table>
