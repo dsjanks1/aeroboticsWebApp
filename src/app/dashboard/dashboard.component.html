@@ -1,3 +1,21 @@
-<p>
-  dashboard works!
-</p>
+<table class="responsive-table highlight striped">
+  <thead>
+    <tr>
+      <th>
+        Name
+      </th>
+      <th>
+        Email
+      </th>
+      <th>
+        User ID
+      </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let client of clients">
+      <td>{{client.name}}</td>
+    </tr>
+  </tbody>
+</table>
