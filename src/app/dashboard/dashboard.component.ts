@@ -5,6 +5,9 @@ import { ScoutMissions } from '../models/scoutMissions.module';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
 import { HttpClient } from '@angular/common/http'
 
+declare let jQuery: any;
+declare let M: any;
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,6 +21,8 @@ export class DashboardComponent implements OnInit {
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
     private changeDetectorRefs: ChangeDetectorRef) {
+
+      
 
     this.setClients();
     this.setScoutMissions();
@@ -53,7 +58,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    jQuery(document).ready(function(){
+      jQuery('.tabs').tabs();
+    });
   }
 
 }
