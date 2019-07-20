@@ -17,7 +17,7 @@ export class DashboardComponent implements OnInit {
 
   private clients: Clients[] = [];
   private scoutMissions: ScoutMissions[] = [];
-
+  selectedClient: any = {};
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -36,6 +36,12 @@ export class DashboardComponent implements OnInit {
       response => {
         this.clients = response.data.results;
         console.log(this.clients);
+
+        setTimeout(function(){
+          jQuery('select').material_select();
+        },200);
+
+
       },
       err => {
         console.log('Error fetching clients' + this.clients);
@@ -60,6 +66,10 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     jQuery(document).ready(function(){
       jQuery('.tabs').tabs();
+
+      
+
+
     });
   }
 
