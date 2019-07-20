@@ -3,8 +3,9 @@ import { CoreService } from '../core.service';
 import { Clients } from '../models/clients.model';
 import { ScoutMissions } from '../models/scoutMissions.module';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
-import { HttpClient } from '@angular/common/http'
 
+import { HttpClient } from '@angular/common/http'
+import * as _ from 'underscore';
 declare let jQuery: any;
 declare let M: any;
 
@@ -17,7 +18,7 @@ export class DashboardComponent implements OnInit {
 
   private clients: Clients[] = [];
   private scoutMissions: ScoutMissions[] = [];
-  selectedClient: any = {};
+  selectedClient: any = [];
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
     private changeDetectorRefs: ChangeDetectorRef) {
@@ -26,6 +27,7 @@ export class DashboardComponent implements OnInit {
 
     this.setClients();
     this.setScoutMissions();
+    // this.onSelectedClientChange(this.selectedClient)
 
   }
 
@@ -63,13 +65,20 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  onSelectedClientChange(i){
+    debugger;
+    // this.selectedClient.push(i);
+    console.log(this.selectedClient);
+  }
+  selectedScoutMissions(missionID, workerID){
+    debugger;
+    // this.selectedClient.push(i);
+    console.log(this.selectedClient);
+  }
+
   ngOnInit() {
     jQuery(document).ready(function(){
       jQuery('.tabs').tabs();
-
-      
-
-
     });
   }
 
