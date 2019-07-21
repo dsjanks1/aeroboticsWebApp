@@ -3,9 +3,9 @@ import { CoreService } from '../core.service';
 import { Clients } from '../models/clients.model';
 import { ScoutMissions } from '../models/scoutMissions.module';
 import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
-
 import { HttpClient } from '@angular/common/http'
 import * as _ from 'underscore';
+
 declare let jQuery: any;
 declare let M: any;
 
@@ -18,16 +18,16 @@ export class DashboardComponent implements OnInit {
 
   private clients: Clients[] = [];
   private scoutMissions: ScoutMissions[] = [];
+
   selectedClient: any = [];
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
-    private changeDetectorRefs: ChangeDetectorRef) {
-
-      
+    ) {
 
     this.setClients();
     this.setScoutMissions();
-    // this.onSelectedClientChange(this.selectedClient)
+
+    console.log(this.selectedClient)
 
   }
 
@@ -39,11 +39,9 @@ export class DashboardComponent implements OnInit {
         this.clients = response.data.results;
         console.log(this.clients);
 
-        setTimeout(function(){
+        setTimeout(function () {
           jQuery('select').material_select();
-        },200);
-
-
+        }, 200);
       },
       err => {
         console.log('Error fetching clients' + this.clients);
@@ -61,25 +59,25 @@ export class DashboardComponent implements OnInit {
       },
       err => {
         console.log('Error fetching Scout Missions' + this.scoutMissions);
-      }
-    )
+      })
   }
 
-  onSelectedClientChange(i){
-    debugger;
-    // this.selectedClient.push(i);
-    console.log(this.selectedClient);
+  onClientChange(val) {
+    debugger
+    this.selectedClient = val
+    console.log(val);
+
   }
-  selectedScoutMissions(missionID, workerID){
+  selectedScoutMissions(client) {
     debugger;
     // this.selectedClient.push(i);
-    console.log(this.selectedClient);
   }
 
   ngOnInit() {
-    jQuery(document).ready(function(){
+    jQuery(document).ready(function () {
       jQuery('.tabs').tabs();
     });
-  }
 
+    // this.selectedClient = 26255;
+  }
 }

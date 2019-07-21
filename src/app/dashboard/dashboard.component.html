@@ -1,8 +1,6 @@
 <div class="row">
   <div class="col s12">
 
-    <button (click)="selectedScoutMissions($event)" class="waves-effect waves-light btn">button</button>
-
     <ul class="tabs">
       <li class="tab col s3"><a href="#scoutMission" class="active">Scout Missions</a></li>
       <li class="tab col s3"><a href="#schedule">Schedule</a></li>
@@ -11,6 +9,9 @@
   <div id="scoutMission" class="col s12">
     <div class="card-panel">
       <h5 class="center-text">Scout Missions</h5>
+      <button class="waves-effect waves-light btn right" (click)="selectedScoutMissions($event.selectedClient)"> Assign Workers</button>
+      <br>
+
       <table class="responsive-table striped centered">
         <thead>
           <tr>
@@ -32,42 +33,25 @@
             <td>{{scoutMission.complete}}</td>
             <td>
 
-              <!-- <div name="test" class="input-field col s12">
-                    <select id="selectedClient" 
-                     [ngModel]="selectedClient" (ngModelChange)="onSelectedClientChange($event)" name="selectedClient" 
-                     #createSelectedClient="ngModel">
-                      <option value="" disabled selected>Choose your option</option>
-                      <option *ngFor="let client of clients" let i="index" value="client.id" [value]="client.id">{{client.name}}</option>
-                     <label>select</label>
-                    </select>
-                  </div> -->
-
-              <div name="test" class="input-field col s12">
-                <!-- <select id="selectedClient" [ngModel]="selectedClient" (ngModelChange)="onSelectedClientChange()"
-                  name="selectedClient" #createSelectedClient="ngModel">
-                  <option value="" disabled selected>Choose your option</option>
-                  <option *ngFor="let client of clients" let i="index" value="client.id" [value]="client.id">
-                    {{client.name}}</option>
-                  <label>select</label>
-                </select> -->
 
 
-                <select id="selectedClient" [ngModel]="selectedClient" (ngModelChange)="onSelectedClientChange($event)"
-                  name="selectedClient" #updateSelectedClient="ngModel" required>
-                  <option value="" disabled selected>Select Client</option>
-                  <option *ngFor="let client of clients" let i=index value="client.id"
-                    [value]="client.id">{{client.name}}</option>
-                </select>
-
+              <div class="col s12">
+                <form>
+                <div class="input-field col s12">
+                  <select   id="selectedClient" [ngModel]="selectedClient" (ngModelChange)="onClientChange($event)"
+                    name="selectedClient" #updateSelectedClient="ngModel" required>
+                    <option value="" disabled selected>Select Client</option>
+                    <option *ngFor="let client of clients" let i=index value="client.id" [value]="client.id">
+                      {{client.name}}</option>
+                  </select>
+                </div>
+              </form>
               </div>
 
-
-
-
             </td>
-
-            <td> <button (click)="selectedScoutMissions(scoutMission.id, selectedClient)"
-                class="waves-effect waves-light btn">button</button></td>
+            {{selectedClient}}
+            <!-- <td> <button (click)="selectedScoutMissions(scoutMission.id, selectedClient)"
+                class="waves-effect waves-light btn">button</button></td> -->
 
 
           </tr>
