@@ -35,6 +35,19 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  setScoutMissions() {
+    this.scoutMissions = [];
+    this.coreService.getScoutMissions().subscribe(
+      res => {
+
+        this.scoutMissions = res.data.results;
+        console.log(this.scoutMissions);
+      },
+      err => {
+        console.log('Error fetching Scout Missions' + this.scoutMissions);
+      })
+  }
+
   setClients() {
     this.clients = [];
     this.coreService.getClients().subscribe(
@@ -44,13 +57,9 @@ export class DashboardComponent implements OnInit {
 
         setTimeout(function () {
           jQuery('select').material_select();
+          jQuery('.datepicker').datepicker();
 
-
-
-
-          let context;
-          // this.selectedClient = 26255;
-
+          // let context;
 
           jQuery('.testt').bind("change", (e) => {
             let dataIndex = parseInt(e.target.attributes['data-index'].value);
@@ -77,27 +86,13 @@ export class DashboardComponent implements OnInit {
   assignWorkers() {
     debugger;
     _.each(this.scoutMissions, function (item, key) {
-      debugger
       this.scoutMissions[key]['workerObj'] = selectedClient[key];
       console.log(this.scoutMissions);
 
-
-      debugger;
     },this);
   }
 
-  setScoutMissions() {
-    this.scoutMissions = [];
-    this.coreService.getScoutMissions().subscribe(
-      res => {
 
-        this.scoutMissions = res.data.results;
-        console.log(this.scoutMissions);
-      },
-      err => {
-        console.log('Error fetching Scout Missions' + this.scoutMissions);
-      })
-  }
 
 
 
