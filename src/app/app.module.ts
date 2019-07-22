@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import {DashboardComponent} from '../app/dashboard/dashboard.component'
 import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
+import { MaterializeModule } from "angular2-materialize";
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterializeModule
     
   ],
   providers: [],

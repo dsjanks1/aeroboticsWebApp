@@ -19,11 +19,10 @@ export class DashboardComponent implements OnInit {
 
   private clients: Clients[] = [];
   private scoutMissions: ScoutMissions[] = [];
-  staticScoutMissions: any = [
-    { "count": 7, "next": null, "previous": null, "results": [{ "id": 1376, "farm_id": 4006, "title": "Scout", "date": "2018-09-11", "complete": false }, { "id": 1375, "farm_id": 4006, "title": "Scout 8", "date": "2018-09-30", "complete": false }, { "id": 1373, "farm_id": 4006, "title": "Scout 5", "date": "2018-10-03", "complete": false }, { "id": 1372, "farm_id": 4006, "title": "Scout 4", "date": "2018-09-23", "complete": false }, { "id": 1371, "farm_id": 4006, "title": "Scout 3", "date": "2018-09-15", "complete": false }, { "id": 1370, "farm_id": 4006, "title": "Scout 2", "date": "2018-09-11", "complete": false }, { "id": 1369, "farm_id": 4006, "title": "Scout 1", "date": "2018-09-14", "complete": false }] }
-  ];
+  dates: any = {};
+  date: any = [];
+  updatedDates: any = [];
 
-  staticClients: any = [{"count":3,"next":null,"previous":null,"results":[{"id":6253,"name":"Farmer Developer","email":"developertest@test.com","user_id":6378},{"id":6254,"name":"Farm Worker 1","email":"developer2test@test.com","user_id":6379},{"id":6255,"name":"Farm Worker 2","email":"developer3test@test.com","user_id":6380}]}]
 
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
@@ -56,10 +55,10 @@ export class DashboardComponent implements OnInit {
         console.log(this.clients);
 
         setTimeout(function () {
-          jQuery('select').material_select();
+          jQuery('select').formSelect();
           jQuery('.datepicker').datepicker();
 
-          // let context;
+          let context;
 
           jQuery('.testt').bind("change", (e) => {
             let dataIndex = parseInt(e.target.attributes['data-index'].value);
@@ -81,7 +80,27 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+  // onClientChange(i){
+  //   debugger
+  //   // console.log(selectedClient)
 
+  //    let context;
+
+  //         jQuery('.testt').bind("change", (e) => {
+  //           let dataIndex = parseInt(e.target.attributes['data-index'].value);
+  //           let selectedObj: any = { 'index': dataIndex, 'id': i };
+
+  //           if (selectedClient[dataIndex]) {
+  //             selectedClient[dataIndex] = selectedObj;
+  //           } else {
+  //             // debugger
+  //             selectedClient.push(selectedObj);
+  //           }
+  //         })
+
+  //             console.log(selectedClient)
+
+  // }
 
   assignWorkers() {
     debugger;
@@ -89,10 +108,32 @@ export class DashboardComponent implements OnInit {
       this.scoutMissions[key]['workerObj'] = selectedClient[key];
       console.log(this.scoutMissions);
 
-    },this);
+    }, this);
+
   }
 
+  onDateChange(i, p) {
 
+
+    let selectedObj: any = { 'index': p, 'id': i };
+
+    if (this.updatedDates[p]) {
+      
+      this.updatedDates[p] = selectedObj;
+    } else {
+      
+      this.updatedDates.push(selectedObj);
+    }
+
+    console.log(this.updatedDates)
+
+
+    // _.each(this.scoutMissions, function (item, key) {
+    //   this.scoutMissions[key]['newDateObj'] = this.updatedDates[key];
+    //   debugger
+    // }, this);
+    console.log(this.scoutMissions);
+  }
 
 
 
