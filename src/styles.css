@@ -14,8 +14,8 @@ th {
 }
 
 .sidenav {
-    width: 250px;
-    border-right: 1px solid #000;
+    width: 210px !important;
+    /* border-right: 1px solid #000; */
     top: 0;
     margin:0;
     /* padding-bottom: 60px; */
@@ -28,7 +28,7 @@ th {
 }
 
 .sidenav .user-view {
-    padding: 14px 42px 0;
+    padding: 11px 42px 0 !important;
     margin-bottom: 18px;
     
 }
@@ -76,4 +76,30 @@ th {
 }
 .center-text{
     text-align: center;
+}
+.tab-bar{
+    margin-top: 40px !important;
+}
+
+.tabs .tab a:hover, .tabs .tab a.active {
+    background-color: transparent;
+    color: #30435E !important;
+}
+
+.tabs .indicator {
+   
+    background-color: #30435E !important;
+}
+
+.tabs .tab a {
+    color: #30435E !important;
+}
+
+.tabs .tab a:focus, .tabs .tab a:focus.active {
+    background-color: rgba(48, 67, 94, 0.363) !important;
+}
+
+.btn, .btn-large, .btn-small {
+    background-color: #30435E !important;
+   
 }
