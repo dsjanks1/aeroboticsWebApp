@@ -75,10 +75,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let client of clients">
-            <td>{{client.name}}</td>
-            <td>{{client.email}}</td>
-            <td>{{client.user_id}}</td>
+          <tr *ngFor="let schedule of scoutMissions">
+            <td>{{schedule.workerObj.id}}</td>
+            <!-- <td>{{schedule.email}}</td>
+            <td>{{schedule.user_id}}</td> -->
           </tr>
         </tbody>
       </table>
