@@ -1,6 +1,14 @@
 <div class="row">
   <div class="col s12">
+    <div class="input-field col s12">
 
+    
+      {{selectedClient}}
+
+
+
+
+    </div>
     <ul class="tabs">
       <li class="tab col s3"><a href="#scoutMission" class="active">Scout Missions</a></li>
       <li class="tab col s3"><a href="#schedule">Schedule</a></li>
@@ -9,7 +17,8 @@
   <div id="scoutMission" class="col s12">
     <div class="card-panel">
       <h5 class="center-text">Scout Missions</h5>
-      <button class="waves-effect waves-light btn right" (click)="selectedScoutMissions($event.selectedClient)"> Assign Workers</button>
+      <button class="waves-effect waves-light btn right" (click)="assignWorkers()"> Assign
+        Workers</button>
       <br>
 
       <table class="responsive-table striped centered">
@@ -25,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let scoutMission of scoutMissions">
+          <tr *ngFor="let scoutMission of scoutMissions; let i=index" >
             <td>{{scoutMission.title}}</td>
             <td>{{scoutMission.id}}</td>
             <td>{{scoutMission.farm_id}}</td>
@@ -35,18 +44,11 @@
 
 
 
-              <div class="col s12">
-                <form>
-                <div class="input-field col s12">
-                  <select   id="selectedClient" [ngModel]="selectedClient" (ngModelChange)="onClientChange($event)"
-                    name="selectedClient" #updateSelectedClient="ngModel" required>
-                    <option value="" disabled selected>Select Client</option>
-                    <option *ngFor="let client of clients" let i=index value="client.id" [value]="client.id">
-                      {{client.name}}</option>
-                  </select>
-                </div>
-              </form>
-              </div>
+                <select id="selectedClientss-{{i}}" [attr.data-index]="i" [ngClass]="'testt'" >
+                <option value="" disabled selected>Select Client</option>
+                <option *ngFor="let client of clients" [attr.data-XX]="client"  value="client.id" [value]="client.id">{{client.name}}
+                </option>
+              </select>
 
             </td>
             {{selectedClient}}
