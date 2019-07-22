@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   dates: any = {};
   date: any = [];
   updatedDates: any = [];
-
+  selectedWorker: string;
 
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
@@ -62,7 +62,7 @@ export class DashboardComponent implements OnInit {
 
           jQuery('.testt').bind("change", (e) => {
             let dataIndex = parseInt(e.target.attributes['data-index'].value);
-            let selectedObj: any = { 'index': dataIndex, 'id': e.target.value };
+            let selectedObj: any = { 'index': dataIndex, 'name': e.target.value };
 
             if (selectedClient[dataIndex]) {
               selectedClient[dataIndex] = selectedObj;
@@ -136,7 +136,19 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  onWorkerViewScheduleChange(worker){
+    this.selectedWorker = worker;
 
+debugger
+let filterByWorker: any = _.where(this.scoutMissions, { name: this.selectedWorker
+
+ 
+
+})
+
+console.log(filterByWorker)
+
+  }
 
 
   ngOnInit() {
