@@ -9,6 +9,7 @@
   <div id="scoutMission" class="col s12">
     <div class="card-panel">
       <h5 class="center-text">Scout Missions</h5>
+     
       <button class="waves-effect waves-light btn right" (click)="assignWorkers()"> Assign
         Workers</button>
       <br>
@@ -22,6 +23,7 @@
             <th>Date</th>
             <th>Complete</th>
             <th>Allocate Worker</th>
+            <th>Select Date</th>
 
           </tr>
         </thead>
@@ -42,21 +44,33 @@
                     [value]="client.name">{{client.name}}
                   </option>
                 </select>
+
+                
+                    <!-- <select id="selectedClient-{{i}}" [attr.data-index]="i" [(ngModel)]="selectedClient" (ngModelChange)="onClientChange($event)" name="selectedClient"
+                    [ngClass]="'testt'">
+                      <option value="" disabled selected>Select Client</option>
+                      <option *ngFor="let client of clients"  value="client.id" [value]="client.id">{{client.name}}</option>
+                    </select>
+                    <label>Year</label> -->
+                 
               </div>
 
             </td>
 
             <td>
-                <div class="input-field col s8">
+                <div class="input-field col s8" >
 
-              <input type="text" class="datepicker">
+              <!-- <input type="text" class="datepicker" id="date-picker-{{i}}" [ngModel]="datePickerTest"> -->
+              <input type="date" [(ngModel)]="scoutMission.date" (ngModelChange)="onDateChange($event, i)">
                 </div>
+
+
             </td>
           </tr>
         </tbody>
       </table>
     </div>
-
+<!-- {{date[0]}} ddd -->
   </div>
   <div id="schedule" class="col s12">
 
@@ -73,7 +87,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let schedule of scoutMissions" [hidden]="!schedule.workerObj">
-            <td>{{schedule.workerObj.id}}</td>
+            <td *ngIf="schedule.workerObj">{{schedule.workerObj.id}}</td>
             <td>{{schedule.farm_id}}</td>
             <td>{{schedule.date}}</td>
             <td>{{schedule.complete}}</td>
