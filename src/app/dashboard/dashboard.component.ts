@@ -23,6 +23,7 @@ export class DashboardComponent implements OnInit {
   date: any = [];
   updatedDates: any = [];
   selectedWorker: string;
+  showSpinner: boolean = true;
 
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
@@ -35,12 +36,15 @@ export class DashboardComponent implements OnInit {
   }
 
   setScoutMissions() {
+
     this.scoutMissions = [];
     this.coreService.getScoutMissions().subscribe(
       res => {
 
         this.scoutMissions = res.data.results;
         console.log(this.scoutMissions);
+        
+        this.showSpinner = false;
       },
       err => {
         console.log('Error fetching Scout Missions' + this.scoutMissions);
@@ -59,7 +63,6 @@ export class DashboardComponent implements OnInit {
           jQuery('.datepicker').datepicker();
 
           let context;
-
           jQuery('.testt').bind("change", (e) => {
             let dataIndex = parseInt(e.target.attributes['data-index'].value);
             let selectedObj: any = { 'index': dataIndex, 'name': e.target.value };
@@ -72,9 +75,9 @@ export class DashboardComponent implements OnInit {
           })
 
         }, 200);
+
       },
       err => {
-
         console.log('Error fetching clients' + this.clients);
       }
     )
@@ -103,13 +106,14 @@ export class DashboardComponent implements OnInit {
   // }
 
   assignWorkers() {
-    debugger;
+    //
     _.each(this.scoutMissions, function (item, key) {
       this.scoutMissions[key]['workerObj'] = selectedClient[key];
       console.log(this.scoutMissions);
 
     }, this);
 
+    M.toast({html: 'Assigned workers successfully!', class :'rounded'})
   }
 
   onDateChange(i, p) {

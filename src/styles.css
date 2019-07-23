@@ -101,5 +101,9 @@ th {
 
 .btn, .btn-large, .btn-small {
     background-color: #30435E !important;
-   
+}
+
+.center-spinner{
+    left: calc(50% - 50px);
+    top: calc(50% - 50px);
 }
