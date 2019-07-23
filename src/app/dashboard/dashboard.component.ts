@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CoreService } from '../core.service';
 import { Clients } from '../models/clients.model';
 import { ScoutMissions } from '../models/scoutMissions.module';
-import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http'
 import * as _ from 'underscore';
 
@@ -28,22 +28,18 @@ export class DashboardComponent implements OnInit {
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
   ) {
-
     this.setClients();
     this.setScoutMissions();
-
-
   }
 
   setScoutMissions() {
-
+    //get list of scout missions
     this.scoutMissions = [];
     this.coreService.getScoutMissions().subscribe(
       res => {
 
         this.scoutMissions = res.data.results;
         console.log(this.scoutMissions);
-        
         this.showSpinner = false;
       },
       err => {
@@ -52,6 +48,7 @@ export class DashboardComponent implements OnInit {
   }
 
   setClients() {
+    //get list of all clients
     this.clients = [];
     this.coreService.getClients().subscribe(
       response => {
@@ -59,21 +56,24 @@ export class DashboardComponent implements OnInit {
         console.log(this.clients);
 
         setTimeout(function () {
+          //initiats datepicker and select drop down after clients call is complete
           jQuery('select').formSelect();
           jQuery('.datepicker').datepicker();
 
           let context;
-          jQuery('.testt').bind("change", (e) => {
+
+          //targets class - selectedClientDropDown, get index of which dropdown as been selected
+          jQuery('.selectedClientDropDown').bind("change", (e) => {
             let dataIndex = parseInt(e.target.attributes['data-index'].value);
             let selectedObj: any = { 'index': dataIndex, 'name': e.target.value };
-
+            //if dropdown as already been selected, update specific entry
             if (selectedClient[dataIndex]) {
               selectedClient[dataIndex] = selectedObj;
             } else {
+              //else push selected worker into selectedClient object
               selectedClient.push(selectedObj);
             }
           })
-
         }, 200);
 
       },
@@ -83,77 +83,34 @@ export class DashboardComponent implements OnInit {
     )
   }
 
-  // onClientChange(i){
-  //   debugger
-  //   // console.log(selectedClient)
-
-  //    let context;
-
-  //         jQuery('.testt').bind("change", (e) => {
-  //           let dataIndex = parseInt(e.target.attributes['data-index'].value);
-  //           let selectedObj: any = { 'index': dataIndex, 'id': i };
-
-  //           if (selectedClient[dataIndex]) {
-  //             selectedClient[dataIndex] = selectedObj;
-  //           } else {
-  //             // debugger
-  //             selectedClient.push(selectedObj);
-  //           }
-  //         })
-
-  //             console.log(selectedClient)
-
-  // }
-
   assignWorkers() {
-    //
+    //For Worker Scedule Tab
+
+    //this is an function is called when clickingg the assign workers button
     _.each(this.scoutMissions, function (item, key) {
+      //injects workerobj into scoutmissions object and specific index
       this.scoutMissions[key]['workerObj'] = selectedClient[key];
       console.log(this.scoutMissions);
 
     }, this);
-
-    M.toast({html: 'Assigned workers successfully!', class :'rounded'})
+    //alert user when workers have been successfully assigned 
+    M.toast({ html: 'Assigned workers successfully!', class: 'rounded' })
   }
 
   onDateChange(i, p) {
-
-
+    //onchange function for date picker at eac index
     let selectedObj: any = { 'index': p, 'id': i };
 
     if (this.updatedDates[p]) {
-      
+      //if specific date picker has already been selected, update specific entry
+
       this.updatedDates[p] = selectedObj;
     } else {
-      
+      //else update date throug two way binding - ngModel
+
       this.updatedDates.push(selectedObj);
     }
-
-    console.log(this.updatedDates)
-
-
-    // _.each(this.scoutMissions, function (item, key) {
-    //   this.scoutMissions[key]['newDateObj'] = this.updatedDates[key];
-    //   debugger
-    // }, this);
-    console.log(this.scoutMissions);
   }
-
-
-  onWorkerViewScheduleChange(worker){
-    this.selectedWorker = worker;
-
-debugger
-let filterByWorker: any = _.where(this.scoutMissions, { name: this.selectedWorker
-
- 
-
-})
-
-console.log(filterByWorker)
-
-  }
-
 
   ngOnInit() {
     jQuery(document).ready(function () {
