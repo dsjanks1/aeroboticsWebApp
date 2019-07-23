@@ -3,22 +3,19 @@ import { throwError as observableThrowError, of as observableOf, Observable, Beh
 import { share, catchError, map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
-import { environment } from '../environments/environment';
-import {Clients } from '../app/models/clients.model'
-import {ScoutMissions} from '../app/models/scoutMissions.module'
+import { Clients } from '../app/models/clients.model'
+import { ScoutMissions } from '../app/models/scoutMissions.module'
 
 import { debug } from 'util';
 // import { RequestOptions} from 'https';
 
-const httpOptions ={
-  headers: new HttpHeaders({'Authorization': '1536660107LWZ2JGK17J72HR4O5NU53FBBSLSMRB'})
+const httpOptions = {
+  headers: new HttpHeaders({ 'Authorization': '1536660107LWZ2JGK17J72HR4O5NU53FBBSLSMRB' })
 }
 
 @Injectable({
   providedIn: 'root'
 })
-
-
 
 export class CoreService {
 
@@ -27,8 +24,6 @@ export class CoreService {
   private scoutMissions: ScoutMissions;
   private clientsEndpoint: string;
   private scoutMissionEndpoint: string;
-  private apiHeader: any;
-
 
   public handleError(error: any) {
     if (error instanceof Response) {
@@ -57,11 +52,11 @@ export class CoreService {
       }),
       catchError(error => this.handleError(error)),
       share()
-);
+    );
     return this.observable
   }
 
-  //Get Scout Missions
+  //Get All Scout Missions
 
   getScoutMissions() {
     const url = `${this.scoutMissionEndpoint}`;
@@ -74,7 +69,7 @@ export class CoreService {
       }),
       catchError(error => this.handleError(error)),
       share()
-);
+    );
     return this.observable
   }
 
