@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   selectedWorker: string;
   showSpinner: boolean = true;
 
+
   constructor(private coreService: CoreService,
     private activatedRoute: ActivatedRoute, private _http: HttpClient,
   ) {
@@ -57,6 +58,7 @@ export class DashboardComponent implements OnInit {
 
         setTimeout(function () {
           //initiats datepicker and select drop down after clients call is complete
+
           jQuery('select').formSelect();
           jQuery('.datepicker').datepicker();
 
@@ -67,6 +69,7 @@ export class DashboardComponent implements OnInit {
             let dataIndex = parseInt(e.target.attributes['data-index'].value);
             let selectedObj: any = { 'index': dataIndex, 'name': e.target.value };
             //if dropdown as already been selected, update specific entry
+
             if (selectedClient[dataIndex]) {
               selectedClient[dataIndex] = selectedObj;
             } else {
@@ -83,6 +86,7 @@ export class DashboardComponent implements OnInit {
     )
   }
 
+
   assignWorkers() {
     //For Worker Scedule Tab
 
@@ -95,6 +99,24 @@ export class DashboardComponent implements OnInit {
     }, this);
     //alert user when workers have been successfully assigned 
     M.toast({ html: 'Assigned workers successfully!', class: 'rounded' })
+
+
+  }
+
+  onDateChange(i, p) {
+
+    let selectedObj: any = { 'index': p, 'id': i };
+
+    if (this.updatedDates[p]) {
+      
+      this.updatedDates[p] = selectedObj;
+    } else {
+      
+      this.updatedDates.push(selectedObj);
+    }
+
+    console.log(this.updatedDates)
+
   }
 
   onDateChange(i, p) {
@@ -111,6 +133,20 @@ export class DashboardComponent implements OnInit {
       this.updatedDates.push(selectedObj);
     }
   }
+
+  onWorkerViewScheduleChange(worker){
+    this.selectedWorker = worker;
+
+let filterByWorker: any = _.where(this.scoutMissions, { name: this.selectedWorker
+
+ 
+
+})
+
+console.log(filterByWorker)
+
+  }
+
 
   ngOnInit() {
     jQuery(document).ready(function () {
