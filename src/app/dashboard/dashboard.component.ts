@@ -104,22 +104,6 @@ export class DashboardComponent implements OnInit {
   }
 
   onDateChange(i, p) {
-
-    let selectedObj: any = { 'index': p, 'id': i };
-
-    if (this.updatedDates[p]) {
-      
-      this.updatedDates[p] = selectedObj;
-    } else {
-      
-      this.updatedDates.push(selectedObj);
-    }
-
-    console.log(this.updatedDates)
-
-  }
-
-  onDateChange(i, p) {
     //onchange function for date picker at eac index
     let selectedObj: any = { 'index': p, 'id': i };
 
